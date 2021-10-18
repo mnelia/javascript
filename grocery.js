@@ -140,48 +140,75 @@ function calculateTotal() {
 
 
 // Exercise 5
-function applyPromotionsSubtotals() {
+function generateCart() {
+    cart = [];
+     for ( let i = 0; i < cartList.length; i++) {        
+        let cartListId = cartList[i].name;
+        let nuevo = {
+           name: cartList[i].name,
+           price: cartList[i].price,
+           type: cartList[i].type,
+           quantity: 1,
+           subtotal: cartList[i].price,
+           subtotalWithDiscount: 0,
+    }
+};
+    if(cart.length){
+        let indexOfItemInCart = giveIndexIfExistItemInCart(cartListId)
+        if (indexOfItemInCart >= 0){
+            cart.push()
+            cart[indexOfItemInCart].quantity = cart[indexOfItemInCart].quantity + 1;
+            cart[indexOfItemInCart].subtotal = cart[indexOfItemInCart].subtotal + cart[indexOfItemInCart].price;
+        }else{
+            cart.push(nuevo);
+        }
+        }else {
+            cart.push (nuevo);
+        }
 
+    }
+
+    console.log(cart);
+    const giveIndexIfExistItemInCart = (itemName) => {
+        for (let j = 0; j < cart.length; j++) {
+            if (cart[j].name === itemName) {
+             return j
+        }
+        return -1
+    }
 }
+ 
 
 // Exercise 6
-function generateCart() {
-    cart = []
-    for ( let i = 0; i < cartList.length; i++) {        
-    let cartListId = cartList[i].name 
-    let nuevo = {
-        name: cartList[i].name,
-         price: cartList[i].price,
-        type: cartList[i].type,
-        quantity: 1,
-        subtotal: cartList[i].price,
-        subtotalWithDiscount: 0,
-}
-    if(cart.length){
-        debugger
-    for (let j = 0; j < cart.length; j++) {
-        if (cart[j].name == cartListId) {
-            cart[j].quantity = cart[j].quantity + 1
-            cart[j].subtotal = cart[j].subtotal + cart[j].price
-        }else{ 
-             cart.push( nuevo )
-        }
-    }
-    }else {
-        cart.push(nuevo)
-    }
-    }
+function applyPromotionsCart(cartList) {
+    let cookingOil = 10.5
     console.log(cart)
-}
+    for (let i = 0; i < cart.length; i++) {
+        // compruebo mediante if si tengo el producto
+        console.log(cookingOil)
+        if (cart[i].name === 'cooking Oil') {
+              if (cookingOil.quantity >= 3){
+                cart[i].subtotalWithDiscount = 10 * cart[i].quantity
+              }
+        }
+        
+    }
+    
+}       
+     
+ 
+
+  
 
 
 // Exercise 7
-function applyPromotionsCart() {
+function apply() {
     // Apply promotions to each item in the array "cart"
-    for (let i = 0; i < cart.length; i++) {
+  
+        
 
-    }
 }
+
 
 // Exercise 8
 function addToCart(id) {
