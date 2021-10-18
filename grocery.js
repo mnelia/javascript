@@ -180,8 +180,9 @@ function generateCart() {
  
 
 // Exercise 6
-function applyPromotionsCart(cartList) {
+function applyPromotionsCart() {
     let cookingOil = 10.5
+    let instantCupcake = 5
     console.log(cart)
     for (let i = 0; i < cart.length; i++) {
         // compruebo mediante if si tengo el producto
@@ -191,6 +192,11 @@ function applyPromotionsCart(cartList) {
                 cart[i].subtotalWithDiscount = 10 * cart[i].quantity
               }
         }
+        if (cart[i].name === 'instante cupcake mixture') {
+            if (instantCupcake.quantity >= 3){
+              cart[i].subtotalWithDiscount =  cart[i].quantity * (instantCupcake * 2/3 )
+            }
+      }
         
     }
     
