@@ -142,58 +142,62 @@ function calculateTotal() {
 // Exercise 5
 function generateCart() {
     cart = [];
-     for ( let i = 0; i < cartList.length; i++) {        
-        let cartListId = cartList[i].name;
-        let nuevo = {
+    let cartListId;
+    let nuevo;
+     for ( let i = 0; i < cartList.length; i++) { 
+        cartListId = cartList[i].name;
+        nuevo = {
            name: cartList[i].name,
            price: cartList[i].price,
            type: cartList[i].type,
            quantity: 1,
            subtotal: cartList[i].price,
            subtotalWithDiscount: 0,
-    }
-};
-    if(cart.length){
-        let indexOfItemInCart = giveIndexIfExistItemInCart(cartListId)
-        if (indexOfItemInCart >= 0){
-            cart.push()
-            cart[indexOfItemInCart].quantity = cart[indexOfItemInCart].quantity + 1;
-            cart[indexOfItemInCart].subtotal = cart[indexOfItemInCart].subtotal + cart[indexOfItemInCart].price;
-        }else{
+         }
+    
+        if(cart.length){
+            let indexOfItemInCart = giveIndexIfExistItemInCart(cartListId)
+            if (indexOfItemInCart >= 0){
+                cart[indexOfItemInCart].quantity = cart[indexOfItemInCart].quantity + 1;
+                cart[indexOfItemInCart].subtotal = cart[indexOfItemInCart].subtotal + cart[indexOfItemInCart].price;
+            }else{
+                cart.push(nuevo);
+            }
+        }else {
             cart.push(nuevo);
         }
-        }else {
-            cart.push (nuevo);
-        }
-
     }
 
-    console.log(cart);
+        console.log(cart);
+    }
+
     const giveIndexIfExistItemInCart = (itemName) => {
         for (let j = 0; j < cart.length; j++) {
             if (cart[j].name === itemName) {
              return j
         }
-        return -1
     }
+    return -1
 }
  
 
 // Exercise 6
 function applyPromotionsCart() {
+    
     let cookingOil = 10.5
     let instantCupcake = 5
     console.log(cart)
     for (let i = 0; i < cart.length; i++) {
         // compruebo mediante if si tengo el producto
-        console.log(cookingOil)
-        if (cart[i].name === 'cooking Oil') {
-              if (cookingOil.quantity >= 3){
+        
+        if (cart[i].name === 'cooking oil') {
+              if (cart[i].quantity >= 3){
                 cart[i].subtotalWithDiscount = 10 * cart[i].quantity
               }
+              
         }
         if (cart[i].name === 'instante cupcake mixture') {
-            if (instantCupcake.quantity >= 3){
+            if (cart[i].quantity >= 3){
               cart[i].subtotalWithDiscount =  cart[i].quantity * (instantCupcake * 2/3 )
             }
       }
@@ -218,8 +222,7 @@ function apply() {
 
 // Exercise 8
 function addToCart(id) {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
+    
     addToCartList(id)
 }
 
