@@ -2,52 +2,52 @@
 // Move this variable to a json file and load the data in this js
 
 var products = [
-    {
-        name: 'cooking oil',
-        price: 10.5,
-        type: 'grocery'
-    },
-    {
-        name: 'Pasta',
-        price: 6.25,
-        type: 'grocery'
-    },
-    {
-        name: 'Instant cupcake mixture',
-        price: 5,
-        type: 'grocery'
-    },
-    {
-        name: 'All-in-one',
-        price: 260,
-        type: 'beauty'
-    },
-    {
-        name: 'Zero Make-up Kit',
-        price: 20.5,
-        type: 'beauty'
-    },
-    {
-        name: 'Lip Tints',
-        price: 12.75,
-        type: 'beauty'
-    },
-    {
-        name: 'Lawn Dress',
-        price: 15,
-        type: 'clothes'
-    },
-    {
-        name: 'Lawn-Chiffon Combo',
-        price: 19.99,
-        type: 'clothes'
-    },
-    {
-        name: 'Toddler Frock',
-        price: 9.99,
-        type: 'clothes'
-    }
-]
+  {
+    name: "cooking oil",
+    price: 10.5,
+    type: "grocery",
+  },
+  {
+    name: "Pasta",
+    price: 6.25,
+    type: "grocery",
+  },
+  {
+    name: "Instant cupcake mixture",
+    price: 5,
+    type: "grocery",
+  },
+  {
+    name: "All-in-one",
+    price: 260,
+    type: "beauty",
+  },
+  {
+    name: "Zero Make-up Kit",
+    price: 20.5,
+    type: "beauty",
+  },
+  {
+    name: "Lip Tints",
+    price: 12.75,
+    type: "beauty",
+  },
+  {
+    name: "Lawn Dress",
+    price: 15,
+    type: "clothes",
+  },
+  {
+    name: "Lawn-Chiffon Combo",
+    price: 19.99,
+    type: "clothes",
+  },
+  {
+    name: "Toddler Frock",
+    price: 9.99,
+    type: "clothes",
+  },
+];
 
 //console.log(products[0].name) // output 'cooking oil'
 //console.log(products[0]) // output {name: 'cooking oil', price: 10.5, type: 'grocery'}
@@ -55,18 +55,18 @@ var products = [
 var cartList = [];
 var cart = [];
 var subtotal = {
-    grocery: {
-        value: 0, 
-        discount: 0
-    },
-    beauty: {
-        value: 0, 
-        discount: 0
-    },
-    clothes: {
-        value: 0, 
-        discount: 0
-    },
+  grocery: {
+    value: 0,
+    discount: 0,
+  },
+  beauty: {
+    value: 0,
+    discount: 0,
+  },
+  clothes: {
+    value: 0,
+    discount: 0,
+  },
 };
 var total = 0;
 
@@ -80,8 +80,8 @@ function addToCartList(id) {
 
 // Exercise 2
 function cleanCart() {
-    cartList.splice(0, cartList.length);
-    console.log("cleanCart =>", cartList);
+    cart.splice(0, cart.length);
+    console.log("cleanCart =>", cart);
 
 }
 
@@ -101,20 +101,20 @@ function calculateSubtotals() {
             discount: 0
         },
     };
-    for (let i = 0; i < cartList.length; i++) {
+    for (let i = 0; i < cart.length; i++) {
 
-        switch (cartList[i].type) {
+        switch (cart[i].type) {
             case 'grocery':
-                subtotal.grocery.value = cartList[i].price + subtotal.grocery.value;
+                subtotal.grocery.value = cart[i].price*cart[i].quantity + subtotal.grocery.value;
                 break;
 
             case 'beauty':
-                subtotal.beauty.value = cartList[i].price + subtotal.beauty.value;
+                subtotal.beauty.value = cart[i].price*cart[i].quantity+ subtotal.beauty.value;
                 
                 break;
 
             case 'clothes':
-                subtotal.clothes.value = cartList[i].price + subtotal.clothes.value;
+                subtotal.clothes.value =cart[i].price*cart[i].quantity+ subtotal.clothes.value;
                 
                 break;
 
@@ -132,31 +132,31 @@ function calculateSubtotals() {
 // Exercise 4
 function calculateTotal() {
     // Calculate total price of the cart either using the "cartList" array
-   cartList.forEach(product => {
-    total += product.price
+   total=0;
+   cart.forEach(product => {
+    total += product.price*product.quantity
    }); 
    console.log(total);
 }
-
-
+cart = [];
 // Exercise 5
-function generateCart() {
-    cart = [];
-    let cartListId;
+function generateCart(id) {
+  
+    let productI;
     let nuevo;
-     for ( let i = 0; i < cartList.length; i++) { 
-        cartListId = cartList[i].name;
-        nuevo = {
-           name: cartList[i].name,
-           price: cartList[i].price,
-           type: cartList[i].type,
+    productI=products[id-1]
+    productName = productI.name;
+     nuevo = {
+           name: productI.name,
+           price: productI.price,
+           type: productI.type,
            quantity: 1,
-           subtotal: cartList[i].price,
+           subtotal: productI.price,
            subtotalWithDiscount: 0,
          }
     
         if(cart.length){
-            let indexOfItemInCart = giveIndexIfExistItemInCart(cartListId)
+            let indexOfItemInCart = giveIndexIfExistItemInCart(productName)
             if (indexOfItemInCart >= 0){
                 cart[indexOfItemInCart].quantity = cart[indexOfItemInCart].quantity + 1;
                 cart[indexOfItemInCart].subtotal = cart[indexOfItemInCart].subtotal + cart[indexOfItemInCart].price;
@@ -166,7 +166,7 @@ function generateCart() {
         }else {
             cart.push(nuevo);
         }
-    }
+  
 
         console.log(cart);
     }
@@ -205,41 +205,28 @@ function applyPromotionsCart() {
     }
     
 }       
-     
- 
-
-  
-
+   
 
 // Exercise 7
 function apply() {
-    
-   /* function addToCartList(id) {
+  /* function addToCartList(id) {
         cartList.push(products[id-1]);
         console.log("addToCartList => ", cartList);
     }*/
-
-    
-        
-
 }
-
 
 // Exercise 8
 function addToCart(id) {
-    
-    addToCartList(id)
+  addToCartList(id);
 }
 
 // Exercise 9
 function removeFromCart(id) {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
+  // 1. Loop for to the array products to get the item to add to cart
+  // 2. Add found product to the cartList array
 }
-
-
 
 // Exercise 10
 function printCart() {
-    // Fill the shopping cart modal manipulating the shopping cart dom
+  // Fill the shopping cart modal manipulating the shopping cart dom
 }
