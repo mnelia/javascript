@@ -213,8 +213,13 @@ function applyPromotionsCart() {
 
 // Exercise 7
 function apply() {
-    // Apply promotions to each item in the array "cart"
-  
+    
+   /* function addToCartList(id) {
+        cartList.push(products[id-1]);
+        console.log("addToCartList => ", cartList);
+    }*/
+
+    
         
 
 }
